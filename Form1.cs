@@ -104,8 +104,57 @@ namespace dnevnik410a
             naredba = naredba + textBox5.Text + "','";
             naredba = naredba + textBox6.Text + "','";
             naredba = naredba + textBox7.Text + "',1)";
+            SqlConnection veza = new SqlConnection("Data Source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=dnevnik410a;Integrated security=true");
+            SqlCommand komanda = new SqlCommand(naredba, veza);
+            veza.Open();
+            komanda.ExecuteNonQuery();
+            veza.Close();
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM osoba", veza);
+            tabela = new DataTable();
+            da.Fill(tabela);
+            br_sloga = tabela.Rows.Count- 1;
+            prikazi();
+        }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (br_sloga == tabela.Rows.Count - 1)
+            {
+                br_sloga--;
+            }
+            string naredba = "DELETE FROM osoba WHERE id=" + textBox1.Text;
+            SqlConnection veza = new SqlConnection("Data Source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=dnevnik410a;Integrated security=true");
+            SqlCommand komanda = new SqlCommand(naredba, veza);
+            veza.Open();
+            komanda.ExecuteNonQuery();
+            veza.Close();
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM osoba", veza);
+            tabela = new DataTable();
+            da.Fill(tabela);
+            prikazi();
+        }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // PROMENI
+            // UPDATE osoba
+            // SET ime = 'first', prezime = 'last'
+            // WHERE id = 12
+            string naredba = "UPDATE osoba SET ";
+            naredba += "ime='" + textBox2.Text+"',";
+            naredba += "prezime='" + textBox3.Text + "',";
+            naredba += "adresa='" + textBox4.Text + "',";
+            naredba += "jmbg='" + textBox5.Text + "'";
+            naredba += "WHERE id = " + textBox1.Text;
+            SqlConnection veza = new SqlConnection("Data Source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=dnevnik410a;Integrated security=true");
+            SqlCommand komanda = new SqlCommand(naredba, veza);
+            veza.Open();
+            komanda.ExecuteNonQuery();
+            veza.Close();
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM osoba", veza);
+            tabela = new DataTable();
+            da.Fill(tabela);
+            prikazi();
         }
     }
 }
