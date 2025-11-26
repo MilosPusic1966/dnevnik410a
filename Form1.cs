@@ -60,8 +60,7 @@ namespace dnevnik410a
         private void Form1_Load(object sender, EventArgs e)
         {
             br_sloga = 0;
-            string CS = "Data Source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=dnevnik410a;Integrated security=true";
-            SqlConnection veza = new SqlConnection(CS);
+            SqlConnection veza = konekcija.povezi();
             SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM osoba", veza);
             tabela = new DataTable();
             da.Fill(tabela);
@@ -104,7 +103,7 @@ namespace dnevnik410a
             naredba = naredba + textBox5.Text + "','";
             naredba = naredba + textBox6.Text + "','";
             naredba = naredba + textBox7.Text + "',1)";
-            SqlConnection veza = new SqlConnection("Data Source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=dnevnik410a;Integrated security=true");
+            SqlConnection veza = konekcija.povezi();
             SqlCommand komanda = new SqlCommand(naredba, veza);
             veza.Open();
             komanda.ExecuteNonQuery();
@@ -123,11 +122,17 @@ namespace dnevnik410a
                 br_sloga--;
             }
             string naredba = "DELETE FROM osoba WHERE id=" + textBox1.Text;
-            SqlConnection veza = new SqlConnection("Data Source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=dnevnik410a;Integrated security=true");
+            SqlConnection veza = konekcija.povezi();
             SqlCommand komanda = new SqlCommand(naredba, veza);
-            veza.Open();
-            komanda.ExecuteNonQuery();
-            veza.Close();
+            try
+            {
+                veza.Open();
+                komanda.ExecuteNonQuery();
+                veza.Close();
+            }
+            catch (Exception greska) {
+                MessageBox.Show(greska.GetType().ToString());
+            }
             SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM osoba", veza);
             tabela = new DataTable();
             da.Fill(tabela);
@@ -146,7 +151,7 @@ namespace dnevnik410a
             naredba += "adresa='" + textBox4.Text + "',";
             naredba += "jmbg='" + textBox5.Text + "'";
             naredba += "WHERE id = " + textBox1.Text;
-            SqlConnection veza = new SqlConnection("Data Source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=dnevnik410a;Integrated security=true");
+            SqlConnection veza = konekcija.povezi();
             SqlCommand komanda = new SqlCommand(naredba, veza);
             veza.Open();
             komanda.ExecuteNonQuery();
