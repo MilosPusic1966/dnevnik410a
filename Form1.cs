@@ -27,6 +27,26 @@ namespace dnevnik410a
         }
         public void prikazi()
         {
+            if (tabela.Rows.Count == 0)
+            {
+                textBox1.Text = "";
+                textBox2.Text = "";
+                textBox3.Text = "";
+                textBox4.Text = "";
+                textBox5.Text = "";
+                textBox6.Text = "";
+                textBox7.Text = "";
+            }
+            else
+            {
+                textBox1.Text = tabela.Rows[br_sloga][0].ToString();
+                textBox2.Text = tabela.Rows[br_sloga][1].ToString();
+                textBox3.Text = tabela.Rows[br_sloga][2].ToString();
+                textBox4.Text = tabela.Rows[br_sloga][3].ToString();
+                textBox5.Text = tabela.Rows[br_sloga][4].ToString();
+                textBox6.Text = tabela.Rows[br_sloga][5].ToString();
+                textBox7.Text = tabela.Rows[br_sloga][6].ToString();
+            }
             if (br_sloga == tabela.Rows.Count-1)
                button6.Enabled = false;
             else button6.Enabled = true;
@@ -34,13 +54,7 @@ namespace dnevnik410a
                 button2.Enabled = false;
             else button2.Enabled = true;
 
-            textBox1.Text = tabela.Rows[br_sloga][0].ToString();
-            textBox2.Text = tabela.Rows[br_sloga][1].ToString();
-            textBox3.Text = tabela.Rows[br_sloga][2].ToString();
-            textBox4.Text = tabela.Rows[br_sloga][3].ToString();
-            textBox5.Text = tabela.Rows[br_sloga][4].ToString();
-            textBox6.Text = tabela.Rows[br_sloga][5].ToString();
-            textBox7.Text = tabela.Rows[br_sloga][6].ToString();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -75,6 +89,23 @@ namespace dnevnik410a
         {
             br_sloga = tabela.Rows.Count- 1;
             prikazi();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // DODAJ
+            // INSERT INTO osoba 
+            // VALUES('Jana', 'Karenjina',
+            // 'Glavna', '123123', 'aaa@bbb', '123', 1)
+            string naredba = "INSERT INTO osoba VALUES('";
+            naredba = naredba + textBox2.Text + "','";
+            naredba = naredba + textBox3.Text + "','";
+            naredba = naredba + textBox4.Text + "','";
+            naredba = naredba + textBox5.Text + "','";
+            naredba = naredba + textBox6.Text + "','";
+            naredba = naredba + textBox7.Text + "',1)";
+
+
         }
     }
 }
