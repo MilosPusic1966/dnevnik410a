@@ -31,7 +31,7 @@ namespace dnevnik410a
                 MessageBox.Show("Neispravan e-mail");
             }
             else {
-                if (tabela.Rows[0]["password"].ToString() != textBox2.Text)
+                if (tabela.Rows[0]["pass"].ToString() != textBox2.Text)
                 {
                     MessageBox.Show("Neispravna lozinka ");
                 }
