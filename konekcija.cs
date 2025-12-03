@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace dnevnik410a
 {
@@ -11,7 +12,8 @@ namespace dnevnik410a
     {
         public static SqlConnection povezi()
         {
-            string CS = "Data Source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=dnevnik410a;Integrated security=true";
+            string CS;
+            CS = ConfigurationManager.ConnectionStrings["skola"].ConnectionString;
             SqlConnection veza = new SqlConnection(CS); 
             return veza;
         }

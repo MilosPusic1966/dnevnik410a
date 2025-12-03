@@ -138,7 +138,6 @@ namespace dnevnik410a
             da.Fill(tabela);
             prikazi();
         }
-
         private void button4_Click(object sender, EventArgs e)
         {
             // PROMENI
