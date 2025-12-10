@@ -28,5 +28,10 @@ namespace dnevnik410a
             upisnica nova = new upisnica();
             nova.ShowDialog();
         }
+
+        private void Glavna_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

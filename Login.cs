@@ -40,6 +40,7 @@ namespace dnevnik410a
                     this.Hide();
                     Glavna nova = new Glavna();
                     nova.Show();
+
                 }
             }
         }
