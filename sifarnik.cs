@@ -15,17 +15,30 @@ namespace dnevnik410a
     {
         SqlDataAdapter Adapter;
         DataTable podaci;
-        public sifarnik()
+        string ime_tabele;
+        public sifarnik(string tabela)
         {
+            ime_tabele = tabela;
             InitializeComponent();
         }
 
         private void sifarnik_Load(object sender, EventArgs e)
         {
-            Adapter = new SqlDataAdapter("SELECT * FROM predmet", konekcija.povezi());
+            Adapter = new SqlDataAdapter("SELECT * FROM "+ime_tabele, konekcija.povezi());
             podaci = new DataTable();
             Adapter.Fill(podaci);
             dataGridView1.DataSource = podaci;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataTable menjano = podaci.GetChanges();
+            // DataRowState.Modified = promenjeni
+            // DataRowState.Added    = dodati
+            // DataRowState.Deleted  = obrisani
+            // DataRowState.Unchanged= nepromenjeni
+            Adapter.UpdateCommand = new SqlCommandBuilder(Adapter).GetUpdateCommand();
+            Adapter.Update(menjano);
         }
     }
 }
